@@ -1,0 +1,32 @@
+<div ng-controller="symbol-controller as symbol" class="gridTemplate">
+  <div id="verbConj" ng-touchstart="symbol.closeConjMenu()">
+    <div class="verbConjCarrier">
+      <div ng-repeat="conj in symbol.conjArr track by $index" class="conjableItem">
+        <div ng-touchstart="symbol.clickConjuncted(conj.title, conj.tence)">
+          <img ng-src="img/conj-{{global.language}}/{{conj.tence}}.svg"/><br/>
+          {{conj.title}}</div>
+      </div>
+    </div>
+  </div>
+  <div id="nounConj" ng-touchstart="symbol.closeNounConjMenu()">
+    <div class="nounConjCarrier">
+      <div ng-repeat="conj in symbol.nounConjArr track by $index" class="conjableItem">
+        <div ng-touchstart="symbol.clickNounConjuncted(conj.title, conj.condition)">
+          <img style="height:{{conj.title.length>18?'calc(100% - 85px)':'calc(100% - 65px)'}};"
+               ng-src="img/conj-{{global.language}}-noun/{{conj.condition?(conj.condition!='şu')?conj.condition:'su':'simple'}}.svg"/><br/>
+          {{conj.title}}</div>
+      </div>
+    </div>
+  </div>
+    <span ng-repeat="main in mainData track by $index">
+      <div id="item-{{$index}}" class="gridItem {{main.style}}" ng-touchstart="symbol.wordTouchStart(main, $index)" ng-touchend="symbol.wordTouchEnd(main, $index)">
+        <img ng-src="{{global.symbolPath}}/{{main.slug}}.svg">
+          <div ng-if="main.title.length > 12" class="gridText gridTextLong">{{main.title}}</div>
+          <div ng-if="main.title.length <= 12" class="gridText">{{main.title}}</div>
+        <div class="derivable" ng-if="main.class=='derive'"></div>
+        <div class="group" ng-if="main.class=='group'">
+          <div class="group2"></div>
+        </div>
+      </div>
+    </span>
+</div>
